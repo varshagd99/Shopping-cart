@@ -1,0 +1,13 @@
+.card img{
+    max-height: 3000px;
+    min-height: 350px;
+    
+
+}
+.card{
+    max-width: 18rem;
+}
+
+.price{
+    font-weight: bold;
+}
