@@ -12,7 +12,10 @@ const path=require('path')
 const index=require('./routes/index')
 const userRoutes=require('./routes/user')
 const store=require('connect-mongo')(session)
-mongoose.connect(db.url,{useNewUrlParser:true,useUnifiedTopology: true },()=>{
+mongoose.connect(db.url,{useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false},()=>{
     console.log("mongodb connected")
 })
 require('./config/passport')

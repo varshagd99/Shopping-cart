@@ -1,6 +1,6 @@
 const product=require('../models/product')
 const mongoose=require('mongoose')
-mongoose.connect('mongodb://localhost:27017/cart',{useNewUrlParser: true});
+mongoose.connect("mongodb+srv://varsha:dattebayo@db-iinqi.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser: true,useUnifiedTopology: true});
 let products=[
     new product(
     {
