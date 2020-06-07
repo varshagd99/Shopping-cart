@@ -45,6 +45,4 @@ app.use(function(req,res,next){
 })
 app.use('/user',userRoutes)
 app.use('/',index)
-app.listen(5000||process.env.PORT,()=>{
-    console.log('server started at 3000')
-})
+app.listen(process.env.PORT || 5000)
