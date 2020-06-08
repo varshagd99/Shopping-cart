@@ -11,17 +11,38 @@ const expresshbs=require('express-handlebars')
 const path=require('path')
 const index=require('./routes/index')
 const userRoutes=require('./routes/user')
+const addRoutes=require('./routes/add')
 const store=require('connect-mongo')(session)
-mongoose.connect(db.url,{useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false},()=>{
+mongoose.connect(db.url,{useNewUrlParser: true,useUnifiedTopology: true},()=>{
     console.log("mongodb connected")
 })
 require('./config/passport')
 
 
-app.engine('.hbs',expresshbs({defaultLayout:"layout",extname:".hbs"}))
+app.engine('.hbs',expresshbs({defaultLayout:"layout",extname:".hbs",
+helpers:{
+    ifCond:function (v1,  v2, options) {
+       if(parseInt(v1)===1 && v2 > 1)
+         return options.fn(this)
+        
+       
+    },
+    ifCond1:function(v1,v2,options){
+        if( parseInt(v1)!=1 && parseInt(v1)<v2)
+         return options.fn(this)
+    },
+    ifCond2:function(v1,v2,options){
+        if(parseInt(v1)==v2 && v2>1)
+        return options.fn(this)
+    },
+    inc:function(v1){
+        return parseInt(v1)+1
+    },
+    dec:function(v1){
+        return parseInt(v1)-1
+    }
+
+}}))
 app.set('view engine','.hbs')
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
@@ -41,10 +62,16 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(function(req,res,next){
     res.locals.login=req.isAuthenticated();
     res.locals.session=req.session
+    if(req.session.passport.user=="5e747452e49af62160b1351e"){
+        res.locals.admin=true
+    }
+    
     next()
 })
+
 app.use('/user',userRoutes)
 app.use('/',index)
+app.use('/add',addRoutes)
 app.listen(3000||process.env.PORT,()=>{
     console.log('server started at 3000')
 })

@@ -16,8 +16,8 @@
         <h5 class="card-title">{{ this.title }}</h5>
         <p class="card-text">{{this.description}}</p>
         <div>
-        <div class='price pull-left'>${{ this.price }}</div>
-            <a href="/add-to-cart/{{this._id}}" class="btn btn-success pull-right">Add to cart</a>
+        <div class='price pull-left'>Rs.{{ this.price }}</div>
+            <a href="/add/add-to-cart/{{this._id}}" class="btn btn-success pull-right">Add to cart</a>
         </div>
         
       </div>
@@ -28,3 +28,36 @@
   
 </div>
 {{/each}}
+
+<div class="pagination" style="justify-content: center;">
+  <div class="page" >
+    {{#ifCond currentPage  pages }}
+    <a href='/{{inc currentPage }}'>
+    <span><strong>Page {{inc currentPage }}</strong> 
+      <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+    </span>
+    </a>
+    {{/ifCond }}
+    {{#ifCond1 currentPage  pages }}
+    <a href="/{{ dec currentPage }}">
+    <span><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+    Page {{dec currentPage}}  &nbsp; </span></a> 
+    <a href="/{{inc currentPage}}">
+    <span>
+      Page {{ inc currentPage}}
+       <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+     </span></a>
+     {{/ifCond1}}
+     {{#ifCond2 currentPage  pages}}
+     <a href="/{{ dec currentPage  }}">
+     <span>
+    <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+     Page  {{dec currentPage  }}
+    </span>
+     </a>
+     {{/ifCond2}}
+
+  </div>
+</div>
+
+
