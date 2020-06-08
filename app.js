@@ -62,16 +62,23 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(function(req,res,next){
     res.locals.login=req.isAuthenticated();
     res.locals.session=req.session
-    if(req.session.passport.user=="5e747452e49af62160b1351e"){
+    console.log(req.session.passport.user)
+    if(req.isAuthenticated()){
+    if(req.session.passport.user=="5e98379d38ef0b0994e651fb"){
         res.locals.admin=true
     }
+}
+
     
     next()
 })
 
 app.use('/user',userRoutes)
 app.use('/',index)
+
 app.use('/add',addRoutes)
-app.listen(3000||process.env.PORT,()=>{
+
+app.listen(process.env.PORT||3000,()=>{
+
     console.log('server started at 3000')
 })
