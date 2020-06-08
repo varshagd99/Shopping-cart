@@ -62,7 +62,7 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(function(req,res,next){
     res.locals.login=req.isAuthenticated();
     res.locals.session=req.session
-    console.log(req.session.passport.user)
+    console.log(req.session)
     if(req.isAuthenticated()){
     if(req.session.passport.user=="5e98379d38ef0b0994e651fb"){
         res.locals.admin=true
